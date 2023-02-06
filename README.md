@@ -11,14 +11,15 @@ Below is a sample of a noisy circle (left) and the ground-truth solution (right)
 ![](images/noisy-circle.png) ![](images/ground-truth-circle.png)
 
 
-I approach this problem from two perspecttives:
-1. A brute force CV approach using convolutions of template filter s
+I approach this problem from two perspectives:
+1. A brute force CV approach using convolutions of template filters
 2. A deep learning approach using CNNs
 
 Both approaches perform well. With a noise level of 0.5, the CV approach achieves an average iou value of 0.988 and the deep learning approach 0.884. 
 
 The CV approach is noticeably slower at test time, but it is more reliable than the deep learning approach and requires no training.
 
+Note: The .ipynb file is written for Google Colab
 
 ## CV Approach (convolutions of template filters)
 
@@ -55,7 +56,7 @@ With 500 samples at a noise level of 0.5, the average iou was 0.988
 
 ### Idea
 
-Instead of using a brute force approach, train a CNN to produce a circle's radius and location given a noisy image. This won't be as robust, but will be faster and easier to apply to more complex problems.
+Instead of using a brute force approach, train a CNN to produce a circle's radius and location given a noisy image. This won't be as robust, but will be faster at test time and applicable to more complex problems.
 
 ### Training
 
@@ -85,13 +86,13 @@ Below is a visualization the the (7x7) filters from the CNN's first layer
 
 ![](images/deep-solution/filters.png)
 
-Some of the filters look like edge detectors. The top-right filter even has a circular shape!
+Some of the filters look like edge detectors. The top-right filter appears to be circular.
 
 
 ## Final thoughts
 
-Overall, the CV solution using template convolutions proved to be more robust. However, given enough training time and possibly more parameters, I believe that the CNN solution could match the performance of the CV solution.
+Overall, the CV solution using template convolutions proved to be more accurate. However, given enough training time and possibly more parameters, I believe that the CNN solution could match the performance of the CV solution.
 
 For this exact problem, I would recommend the CV solution as long as image sizes remain small. It is accurate and inference is relatively fast. 
 
-However, if images became too large or runtime is an important factor, the deep learning solution is best. Additionally, for similar problems where our object is not as well defined, the CV solution would not suffice. Deep learning is the better option for understanding and detecting complex objects.
+However, if images become too large or runtime is an important factor, the deep learning solution is best. Additionally, for similar problems where objects are not as well defined, the CV solution would not suffice. Deep learning is the better option for understanding and detecting complex objects.
